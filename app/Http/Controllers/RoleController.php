@@ -28,7 +28,7 @@ class RoleController extends Controller
 
         $roles = $this->roleModel->newQuery()
             ->when($request->input('search'), function ($query, $search) {
-                $query->where('name', 'ilike', "%{$search}%");
+                $query->where('name', 'like', "%{$search}%");
             })
             ->orderByDesc('created_at')
             ->paginate($request->input('per_page', 10))

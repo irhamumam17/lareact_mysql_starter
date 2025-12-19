@@ -107,8 +107,8 @@ class UserController extends Controller
 
         $users = $this->userModel->newQuery()
             ->when($request->input('search'), function ($query, $search) {
-                $query->where('name', 'ilike', "%$search%")
-                    ->orWhere('email', 'ilike', "%$search%");
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%");
             })
             ->with('roles')
             ->orderBy($sort, $direction)

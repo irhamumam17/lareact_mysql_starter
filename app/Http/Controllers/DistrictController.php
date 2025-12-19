@@ -16,10 +16,10 @@ class DistrictController extends Controller
         $districts = District::query()
             ->with('regency')
             ->when(request('search'), function ($query, $search) {
-                $query->where('name', 'ilike', "%{$search}%")
-                    ->orWhere('code', 'ilike', "%{$search}%")
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('code', 'like', "%{$search}%")
                     ->orWhereHas('regency', function ($q) use ($search) {
-                        $q->where('name', 'ilike', "%{$search}%");
+                        $q->where('name', 'like', "%{$search}%");
                     });
             })
             ->when(request('sort'), function ($query, $sort) {

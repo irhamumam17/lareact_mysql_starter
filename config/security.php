@@ -162,34 +162,34 @@ return [
     */
     'csp' => [
         'default-src' => ["'self'"],
-        
+
         'script-src' => [
             "'self'",
         ],
-        
+
         'style-src' => [
             "'self'",
             "'unsafe-inline'", // Required for Tailwind CSS
             'https://fonts.bunny.net', // Add this line
         ],
-        
+
         'img-src' => [
             "'self'",
             'data:',
             'https:',
         ],
-        
+
         'font-src' => [
             "'self'",
             'data:',
             'https://fonts.bunny.net', // Add this line
         ],
-        
+
         'connect-src' => [
             "'self'",
             // WebSocket URLs will be automatically added for Vite HMR and Reverb
         ],
-        
+
         'media-src' => ["'self'"],
         'object-src' => ["'none'"],
         'frame-src' => ["'none'"],
@@ -221,6 +221,7 @@ return [
         'interest-cohort' => '()', // FLoC protection (Google's tracking)
         'autoplay' => '(self)',
         'fullscreen' => '(self)',
+        'unload' => '(self)', // Allow unload/beforeunload events
     ],
 
     /*
@@ -238,4 +239,3 @@ return [
     ],
 
 ];
-

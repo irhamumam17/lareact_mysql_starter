@@ -14,8 +14,8 @@ class MailLogController extends Controller
         $mails = MailLog::query()
             ->with('user')
             ->when(request('search'), function ($query, $search) {
-                $query->where('subject', 'ilike', "%{$search}%")
-                    ->orWhere('message', 'ilike', "%{$search}%");
+                $query->where('subject', 'like', "%{$search}%")
+                    ->orWhere('message', 'like', "%{$search}%");
             })
             ->when(request('sort'), function ($query, $sort) {
                 $direction = request('direction', 'desc');
@@ -89,7 +89,7 @@ class MailLogController extends Controller
     public function show(MailLog $mail)
     {
         $mail->load('user');
-        
+
         return inertia('admin/mails/show', [
             'mail' => $mail,
         ]);

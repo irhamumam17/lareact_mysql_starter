@@ -29,12 +29,12 @@ class ActivityLogController extends Controller
         if ($request->filled('search') && $request->string('search')->toString() !== 'all') {
             $search = $request->string('search')->toString();
             $query->where(function ($q) use ($search) {
-                $q->where('description', 'ilike', "%{$search}%")
-                    ->orWhere('log_name', 'ilike', "%{$search}%")
-                    ->orWhere('event', 'ilike', "%{$search}%")
-                    ->orWhereRaw('CAST(subject_id AS TEXT) ilike ?', ["%{$search}%"])
-                    ->orWhereRaw('CAST(causer_id AS TEXT) ilike ?', ["%{$search}%"])
-                    ->orWhereRaw('properties::text ilike ?', ["%{$search}%"]);
+                $q->where('description', 'like', "%{$search}%")
+                    ->orWhere('log_name', 'like', "%{$search}%")
+                    ->orWhere('event', 'like', "%{$search}%")
+                    ->orWhereRaw('CAST(subject_id AS TEXT) like ?', ["%{$search}%"])
+                    ->orWhereRaw('CAST(causer_id AS TEXT) like ?', ["%{$search}%"])
+                    ->orWhereRaw('properties::text like ?', ["%{$search}%"]);
             });
         }
 
@@ -57,5 +57,3 @@ class ActivityLogController extends Controller
             ->withQueryString();
     }
 }
-
-

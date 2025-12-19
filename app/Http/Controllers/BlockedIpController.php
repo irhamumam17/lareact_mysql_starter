@@ -18,9 +18,9 @@ class BlockedIpController extends Controller
             ->with('blockedBy')
             ->when(request('search'), function ($query, $search) {
                 $query->where(function ($q) use ($search) {
-                    $q->where('ip_address', 'ilike', "%{$search}%")
-                      ->orWhere('mac_address', 'ilike', "%{$search}%")
-                      ->orWhere('reason', 'ilike', "%{$search}%");
+                    $q->where('ip_address', 'like', "%{$search}%")
+                        ->orWhere('mac_address', 'like', "%{$search}%")
+                        ->orWhere('reason', 'like', "%{$search}%");
                 });
             })
             ->when(request('type'), function ($query, $type) {

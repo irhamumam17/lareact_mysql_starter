@@ -21,10 +21,10 @@ class SessionController extends Controller
         if ($request->filled('search')) {
             $search = (string) $request->input('search');
             $query->where(function ($q) use ($search) {
-                $q->where('ip_address', 'ilike', "%{$search}%")
-                    ->orWhere('browser', 'ilike', "%{$search}%")
-                    ->orWhere('device', 'ilike', "%{$search}%")
-                    ->orWhere('user_agent', 'ilike', "%{$search}%");
+                $q->where('ip_address', 'like', "%{$search}%")
+                    ->orWhere('browser', 'like', "%{$search}%")
+                    ->orWhere('device', 'like', "%{$search}%")
+                    ->orWhere('user_agent', 'like', "%{$search}%");
             });
         }
 
@@ -90,5 +90,3 @@ class SessionController extends Controller
         return back()->with('success', 'All sessions for user revoked');
     }
 }
-
-

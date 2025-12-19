@@ -25,11 +25,11 @@ class RateLimitLogController extends Controller
             ->with('user')
             ->when(request('search'), function ($query, $search) {
                 $query->where(function ($q) use ($search) {
-                    $q->where('ip_address', 'ilike', "%{$search}%")
-                      ->orWhere('endpoint', 'ilike', "%{$search}%")
+                    $q->where('ip_address', 'like', "%{$search}%")
+                      ->orWhere('endpoint', 'like', "%{$search}%")
                       ->orWhereHas('user', function ($userQuery) use ($search) {
-                          $userQuery->where('name', 'ilike', "%{$search}%")
-                                   ->orWhere('email', 'ilike', "%{$search}%");
+                          $userQuery->where('name', 'like', "%{$search}%")
+                                   ->orWhere('email', 'like', "%{$search}%");
                       });
                 });
             })
